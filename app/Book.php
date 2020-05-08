@@ -6,20 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
+    protected $table = 'books';
+    public $timestamps = true;
+
+    protected $hidden = ['updated_at'];
+    protected $fillable = array('name', 'description', 'category_id', 'price', 'quantity', 'auther', 'image');
     public function category()
     {
-        return $this->belongsTo('App\Category');
-    }
-    public function rates()
-    {
-        return $this->hasMany('App\Rate');
-    }
-    public function favorites()
-    {
-        return $this->hasMany('App\Favorite');
-    }
-    public function lease()
-    {
-        return $this->belongsToMany('App\User', 'leases', 'book_id','user_id');
+        return $this->belongsTo('Category', 'category_id');
     }
 }

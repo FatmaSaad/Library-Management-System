@@ -14,17 +14,16 @@ class CreateBooksTable extends Migration
     public function up()
     {
         Schema::create('books', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->float('price');
-            $table->string('auther');
-            $table->text('description');
-            $table->integer('quantity');
-            $table->foreignId('category_id')
-            ->constrained()
-            ->onDelete('cascade');
-
+            $table->bigIncrements('id');
             $table->timestamps();
+            $table->softDeletes();
+            $table->string('name', 191);
+            $table->longText('description')->nullable();
+            $table->bigInteger('category_id')->unsigned()->nullable();
+            $table->decimal('price');
+            $table->longText('image');
+            $table->string('auther');
+            $table->integer('quantity');
         });
     }
 

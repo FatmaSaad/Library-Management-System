@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
 {
-    public function books()
-    {
-        return $this->hasMany('App\Book');
-    }
+    protected $table = 'categories';
+    public $timestamps = true;
+
+    protected $hidden = ['created_at', 'updated_at'];
+
+    protected $fillable = array('name');
 }
