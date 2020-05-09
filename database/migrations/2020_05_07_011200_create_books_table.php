@@ -15,8 +15,6 @@ class CreateBooksTable extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->timestamps();
-            $table->softDeletes();
             $table->string('name', 191);
             $table->longText('description')->nullable();
             $table->bigInteger('category_id')->unsigned()->nullable();
@@ -24,6 +22,8 @@ class CreateBooksTable extends Migration
             $table->longText('image');
             $table->string('auther');
             $table->integer('quantity');
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

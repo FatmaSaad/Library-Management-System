@@ -14,14 +14,12 @@ class CreateRatesTable extends Migration
     public function up()
     {
         Schema::create('rates', function (Blueprint $table) {
-            $table->foreignId('user_id')
-                ->constrained()
-                ->onDelete('cascade');
-            $table->foreignId('book_id')
-                ->constrained()
-                ->onDelete('cascade');
-            $table->integer('rate');
+
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('book_id')->unsigned();
             $table->primary(['user_id', 'book_id']);
+            $table->integer('rate');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
