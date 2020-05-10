@@ -16,12 +16,8 @@ class CreateLeasesTable extends Migration
     {
         Schema::create('leases', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')
-                ->constrained()
-                ->onDelete('cascade');
-            $table->foreignId('book_id')
-                ->constrained()
-                ->onDelete('cascade');
+            $table->bigInteger('user_id')->unsigned();
+            $table->bigInteger('book_id')->unsigned();
             $table->date('from')->default(DB::raw('NOW()'));
             $table->date('to')->default(DB::raw('NOW()'));
             $table->timestamps();
