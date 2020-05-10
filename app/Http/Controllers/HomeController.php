@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+
 use Illuminate\Http\Request;
+use App\Book;
+use App\Rate;
 
 class HomeController extends Controller
 {
@@ -23,6 +27,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        // $bookData = Book::all();
+        // $booksrate = $bookData->join('rates','books.id','=','rates.book_id');
+        
+        $bookData = DB::table('books')->join('rates','books.id','=','rates.book_id')->get();
+        $bookFavourite = DB::table('books')->join('favorites','books.id','=','favorites.book_id')->get();
+         return view('home', ['book' => $bookData , 'bookFav'=>$bookFavourite]);
     }
+
+   
 }
