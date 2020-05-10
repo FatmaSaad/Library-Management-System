@@ -30,9 +30,9 @@ class HomeController extends Controller
         // $bookData = Book::all();
         // $booksrate = $bookData->join('rates','books.id','=','rates.book_id');
         
-        $bookData = DB::table('books')->join('rates','books.id','=','rates.book_id')->get();
+        $bookDataWithRate = DB::table('books')->join('rates','books.id','=','rates.book_id')->get();
         $bookFavourite = DB::table('books')->join('favorites','books.id','=','favorites.book_id')->get();
-         return view('home', ['book' => $bookData , 'bookFav'=>$bookFavourite]);
+         return view('home', ['book' => $bookDataWithRate , 'bookFav'=>$bookFavourite]);
     }
 
    

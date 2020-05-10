@@ -24,11 +24,11 @@
                 <div class="col-lg-2 mt-5">
 
                 <ul class="list-group">
-                        <li class="list-group-item">Arts</li>
-                        <li class="list-group-item">Music</li>
-                        <li class="list-group-item">Kids</li>
-                        <li class="list-group-item">Business</li>
-                        <li class="list-group-item">Computers</li>
+                        <li class="list-group-item"><a href="{{ url('/api/book/{Book}') }}">Arts</a></li>
+                        <li class="list-group-item"><a href="{{ url('/api/book/{Book}') }}">Music</a></li>
+                        <li class="list-group-item"><a href="{{ url('/api/book/{Book}') }}">Kids</a></li>
+                        <li class="list-group-item"><a href="{{ url('/api/book/{Book}') }}">Business</a></li>
+                        <li class="list-group-item"><a href="{{ url('/api/book/{Book}') }}">Computers</a></li>
                 </ul>
 
                 </div>
@@ -53,7 +53,7 @@
                                     <li class="list-group-item">Rate -- {{$item->rate}}</li>
                                     
                                     @foreach($bookFav as $itemFav)
-                                    <li class="list-group-item">Favourite -- {{$itemFav->book_id}}</li>
+                                    <li class="list-group-item">Favourite -- {{$itemFav->book_id}} -- user {{$itemFav->user_id}}</li>
                                     @endforeach
                                 </ul>
                                 <div class="card-body">

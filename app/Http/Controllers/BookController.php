@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
 use Illuminate\Http\Request;
 use App\Book;
+use App\Category;
 
 class BookController extends Controller
 {
@@ -14,7 +15,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        
+      
     }
 
     /**
@@ -46,7 +47,11 @@ class BookController extends Controller
      */
     public function show($id)
     {
-    
+           
+            $cat = Category::find($id);
+
+            $cat_book = DB::table('books')->join('categories','books.category_id','=','categories.id')->get();
+             return view('category_pages.category',['categoey_item'=>$cat_book]);
 
     }
 
