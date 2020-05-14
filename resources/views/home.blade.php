@@ -5,36 +5,23 @@
 <div class="container-fluid">
     
 
-            <!-- <div class="row">
-
-                    <div class="col-lg-5">
-                    <form class="form-inline d-flex justify-content-center md-form form-sm active-pink active-pink-2 mt-2">
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                        <input class="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search">
-                    </form>
-                    </div>
-                    <div class="col-lg-5">
-
-                       
-                    </div>
-            </div> -->
-
+          
 
            <div class="row">
                 <div class="col-lg-2 mt-5">
 
                 <ul class="list-group">
-                        <li class="list-group-item"><a href="{{ url('/api/book/{Book}') }}">Arts</a></li>
-                        <li class="list-group-item"><a href="{{ url('/api/book/{Book}') }}">Music</a></li>
-                        <li class="list-group-item"><a href="{{ url('/api/book/{Book}') }}">Kids</a></li>
-                        <li class="list-group-item"><a href="{{ url('/api/book/{Book}') }}">Business</a></li>
-                        <li class="list-group-item"><a href="{{ url('/api/book/{Book}') }}">Computers</a></li>
-                </ul>
+                    @forelse($category_data as $cat_name)
+                        <li class="list-group-item"><a href="{{ route('cat_book' , [$cat_name->id]) }}">{{$cat_name->name}}</a></li>
+                    @empty
+                        <div class="alert alert-info"> no books with that category</div>
+                    @endforelse
+               </ul>
 
                 </div>
 
                 @foreach($book as $item)
-                <div class="col-lg-3 mt-5">
+                <div class="col-lg-3 mt-5 " id="booksList">
                
                     <div class="card" style="width: 18rem;">
                                 <img class="card-img-top" src={{$item->image}} alt="Card image cap">
@@ -50,10 +37,17 @@
                                     @endif
 
                                     
-                                    <li class="list-group-item">Rate -- {{$item->rate}}</li>
+                                    <li class="list-group-item">Rate<span style="margin-left:20px"></span> 
+                                    
+                                    @for ($i = 0; $i < 5; $i++)
+                                    <i class="fa fa-star fa-lg" ></i>
+                                    @endfor
+                                   
+                                     
+                                     </li>
                                     
                                     @foreach($bookFav as $itemFav)
-                                    <li class="list-group-item">Favourite -- {{$itemFav->book_id}} -- user {{$itemFav->user_id}}</li>
+                                    <li class="list-group-item">Favourite  <span style="margin-left:20px"></span> <i class="fa fa-heart fa-lg" ></i></li>
                                     @endforeach
                                 </ul>
                                 <div class="card-body">
@@ -67,5 +61,15 @@
 
 
            <div>
+
+ 
+
+          
+
+
 </div>
-@endsection
+
+
+
+@endsection 
+

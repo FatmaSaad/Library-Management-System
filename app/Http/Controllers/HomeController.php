@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Book;
 use App\Rate;
 
+
 class HomeController extends Controller
 {
     /**
@@ -30,9 +31,15 @@ class HomeController extends Controller
         // $bookData = Book::all();
         // $booksrate = $bookData->join('rates','books.id','=','rates.book_id');
         
-        $bookDataWithRate = DB::table('books')->join('rates','books.id','=','rates.book_id')->get();
-        $bookFavourite = DB::table('books')->join('favorites','books.id','=','favorites.book_id')->get();
-         return view('home', ['book' => $bookDataWithRate , 'bookFav'=>$bookFavourite]);
+        $bookDataWithRate = DB::table('books')
+        ->join('rates','books.id','=','rates.book_id')
+        ->get();
+
+        $bookFavourite = DB::table('books')
+        ->join('favorites','books.id','=','favorites.book_id')
+        ->get();
+        
+         return view('home', ['book' => $bookDataWithRate , 'bookFav'=>$bookFavourite , 'category_data'=>\App\Category::all()]);
     }
 
    

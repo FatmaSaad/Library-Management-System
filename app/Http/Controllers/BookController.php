@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use DB;
 use Illuminate\Http\Request;
+
 use App\Book;
 use App\Category;
 
@@ -15,7 +16,10 @@ class BookController extends Controller
      */
     public function index()
     {
-      
+
+        return view ('ajax_search.ajax');
+        
+        
     }
 
     /**
@@ -47,12 +51,15 @@ class BookController extends Controller
      */
     public function show($id)
     {
-           
-            $cat = Category::find($id);
 
-            $cat_book = DB::table('books')->join('categories','books.category_id','=','categories.id')->get();
-             return view('category_pages.category',['categoey_item'=>$cat_book]);
-
+     $cat = Category::find($id);
+      
+       $cat_book = DB::table('books')
+       ->join('categories','books.category_id','=','categories.id')
+       ->where('books.category_id','=',$cat->id)
+       ->get();
+        return view('category_pages.category',['categoey_item'=>$cat_book]);
+      
     }
 
     /**
@@ -87,5 +94,36 @@ class BookController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function search(Request $request)
+    {
+            if($request->ajax())
+            {
+
+                $output="";
+                $search_books = DB::table('books')
+                ->where('name','LIKE','%'.$request->search.'%')
+                ->orWhere('auther','LIKE','%'.$request->search.'%')
+                ->get();
+                if($search_books){
+
+                    foreach($search_books as $itemOfSearch)
+                        {
+                            
+                                    $output.='<div class="card-body">'.
+                                    
+                                    '<h3 class="card-title">'.$itemOfSearch->name.'</h3>'.
+                                    '<h6 class="card-title">'.$itemOfSearch->auther.'</h6>'.
+                                    '<p class="card-text">'.$itemOfSearch->description.'</p>'.
+                                    '<span class="badge badge-default">'.$itemOfSearch->quantity."-- Copies Available".'</span>'.
+                                    '<button class="btn btn-success">'."Lease".'</button>'.
+                                    '</div>'.'<br>';
+                        }
+
+                        return Response($output);
+                }
+            }
+
     }
 }

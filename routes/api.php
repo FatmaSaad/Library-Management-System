@@ -19,4 +19,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::resource('book','BookController');
+Route::get('/api/book/{id}','BookController@show')->name('cat_book');
+
+// Route::get('/api/book','BookController@index');
