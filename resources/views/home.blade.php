@@ -58,14 +58,12 @@
                 
                 </div>
                 @endforeach
+           </div>
 
-
-           <div>
-
- 
-
+                <div class='col-lg-6 ml-5'>
+                    {{ $book->links() }}
+                </div>
           
-
 
 </div>
 

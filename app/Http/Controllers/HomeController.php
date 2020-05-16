@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use DB;
-
 use Illuminate\Http\Request;
 use App\Book;
 use App\Rate;
@@ -33,11 +32,12 @@ class HomeController extends Controller
         
         $bookDataWithRate = DB::table('books')
         ->join('rates','books.id','=','rates.book_id')
-        ->get();
+        ->paginate(1);
+        
 
         $bookFavourite = DB::table('books')
         ->join('favorites','books.id','=','favorites.book_id')
-        ->get();
+        ->paginate(1);
         
          return view('home', ['book' => $bookDataWithRate , 'bookFav'=>$bookFavourite , 'category_data'=>\App\Category::all()]);
     }
