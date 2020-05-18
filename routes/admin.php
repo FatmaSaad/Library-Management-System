@@ -6,7 +6,7 @@ Route::group(['namespace' => 'Admin'], function () {
 
         Route::get('/', 'HomeController@index')->name('admin.dashboard');
          Route::resource('/admins', 'AdminController');
-        Route::resource('/books', 'BookController');
+        // Route::resource('/books', 'BookController');
 
     // });
 

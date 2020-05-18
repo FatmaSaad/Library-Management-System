@@ -18,5 +18,12 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+Route::resource('/books', 'Book\BookController');
+Route::resource('/comments', 'Book\CommentController')->except([
+    'show'
+]);
+Route::get('/cat/{id}','Book\BookController@getSameCat');
+Route::get('/rate','Book\RateController@store');
+Route::get('/fav','Book\FavoriteController@storeOrUpdate');
+Route::get('/lease','Book\LeaseController@store');
 Route::get('/home', 'HomeController@index')->name('home');
