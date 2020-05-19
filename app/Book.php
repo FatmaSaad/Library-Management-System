@@ -1,7 +1,6 @@
 <?php
 
 namespace App;
-// use App\Category;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,9 +11,10 @@ class Book extends Model
 
     protected $hidden = ['updated_at'];
     protected $fillable = array('name', 'description', 'category_id', 'price', 'quantity', 'auther', 'image');
+    public $with=['category'];
     public function category()
     {
-        return $this->belongsTo('App\Category','category_id');
+        return $this->belongsTo('App\Category', 'category_id');
     }
     public function comments()
     {
@@ -24,8 +24,16 @@ class Book extends Model
     {
         return $this->hasMany('App\Rate');
     }
-    public function image()
-    {
-        return $this->morphOne('App\Image', 'imageable');
-    }
+    // public function getUserFavouriteAttribute()
+    // {
+    //     $current_user_id = 0;
+    //     if (auth('jwt')->check() || auth()->check()) {
+    //         $current_user_id = auth('jwt')->user()->id ?? auth('web')->user()->id;
+    //     }
+    //     $user_favourites = $this->favourites->pluck('id');
+
+    //     return $user_favourites->contains($current_user_id);
+    //     //  return $this->morphMany('App\Models\Image', 'model');
+    // }
+
 }

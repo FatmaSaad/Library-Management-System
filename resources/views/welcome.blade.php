@@ -30,8 +30,7 @@
                 justify-content: center;
             }
 
-            .position-ref 
-            {
+            .position-ref {
                 position: relative;
             }
 
@@ -71,8 +70,9 @@
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
-
+                    <a href="{{ route('login') }}">Login</a>
+                    <a class="nav-link" href="{{route('admin.login')}}">{{ ucfirst(config('multiauth.prefix'))
+                    }} </a>
                         @if (Route::has('register'))
                             <a href="{{ route('register') }}">Register</a>
                         @endif

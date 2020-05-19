@@ -69,6 +69,7 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+            'model' => Bitfumes\Multiauth\Model\Admin::class,
         ],
 
         // 'users' => [

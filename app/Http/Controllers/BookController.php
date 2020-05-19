@@ -18,8 +18,8 @@ class BookController extends Controller
     {
 
         return view ('ajax_search.ajax');
-        
-        
+
+
     }
 
     /**
@@ -53,13 +53,13 @@ class BookController extends Controller
     {
 
      $cat = Category::find($id);
-      
+
        $cat_book = DB::table('books')
        ->join('categories','books.category_id','=','categories.id')
        ->where('books.category_id','=',$cat->id)
        ->get();
         return view('category_pages.category',['categoey_item'=>$cat_book]);
-      
+
     }
 
     /**
@@ -110,9 +110,9 @@ class BookController extends Controller
 
                     foreach($search_books as $itemOfSearch)
                         {
-                            
+
                                     $output.='<div class="card-body">'.
-                                    
+
                                     '<h3 class="card-title">'.$itemOfSearch->name.'</h3>'.
                                     '<h6 class="card-title">'.$itemOfSearch->auther.'</h6>'.
                                     '<p class="card-text">'.$itemOfSearch->description.'</p>'.

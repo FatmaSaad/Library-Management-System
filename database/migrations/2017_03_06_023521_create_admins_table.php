@@ -18,10 +18,12 @@ class CreateAdminsTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->bigInteger('phone')->default(1234567890);
             $table->boolean('active')->default(0);
             $table->rememberToken();
             $table->timestamps();
         });
+       
     }
 
     /**

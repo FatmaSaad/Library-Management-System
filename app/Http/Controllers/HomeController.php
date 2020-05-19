@@ -29,18 +29,18 @@ class HomeController extends Controller
     {
         // $bookData = Book::all();
         // $booksrate = $bookData->join('rates','books.id','=','rates.book_id');
-        
+
         $bookDataWithRate = DB::table('books')
         ->join('rates','books.id','=','rates.book_id')
-        ->paginate(1);
-        
+        ->paginate(2);
+
 
         $bookFavourite = DB::table('books')
         ->join('favorites','books.id','=','favorites.book_id')
-        ->paginate(1);
-        
+        ->paginate(2);
+
          return view('home', ['book' => $bookDataWithRate , 'bookFav'=>$bookFavourite , 'category_data'=>\App\Category::all()]);
     }
 
-   
+
 }
