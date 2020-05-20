@@ -1,4 +1,4 @@
-@extends('multiauth::layouts.app')
+@extends('admin.layouts.app')
 @section('title') Edit Books
 @endsection
 

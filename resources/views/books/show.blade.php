@@ -13,11 +13,11 @@
   <div class="row">
 
     <div class="col-md-4">
-      <img class="img-fluid" src="http://placehold.it/750x500" alt="">  
+      <img class="img-fluid" src="http://placehold.it/750x500" alt="">
     </div>
 
     <div class="col-md-4">
-     
+
       <h4>{{$book->description}}</h4>
       <h3 class="my-3">Book Details</h3>
       <ul>
@@ -63,7 +63,7 @@
                 </div>
 
                 </div>
-        
+
     <div class="col-md-4">
       <h1 id="love" style="color:gray;" onclick="updateFavorite()" class="btn">&#x2764;</h1>
         <!-- Rate Widget -->
@@ -81,29 +81,29 @@
             </div>
           </div>
         </div>
-        
+
    </div>
 </div>
   <!-- /.row -->
   <br/>
 <div class="row">
   <div class="container">
-            
+
             <div class="card">
               <label for="addComment" class="card-header">Comment</label>
                 <div class="card-body col-sm-10">
                 <textarea class="form-control card-body" name="addComment" id="addComment" rows="5"></textarea>
                 </div>
-            
+
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <div style="display: none" id="book">{{$book->id}}!{{ csrf_token() }}!{{$rate}}</div>                    
+                    <div style="display: none" id="book">{{$book->id}}!{{ csrf_token() }}!{{$rate}}</div>
                     <button class="btn btn-success btn-circle text-uppercase" id="submitComment" ><span class="glyphicon glyphicon-send"></span> Summit comment</button>
                 </div>
               </div>
-            </div>            
+            </div>
       </div>
-    </div>  
+    </div>
     </div>
 </br>
 </br>
@@ -127,7 +127,7 @@
 <div class="container">
   <h3 class="my-4">Related Projects</h3>
   <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-    <div class="carousel-inner">  
+    <div class="carousel-inner">
         <div class="carousel-item active">
         <div class="d-flex flex-row">
           @if($relatedBooks)
@@ -164,7 +164,7 @@
   <!-- /.row -->
 
 <!-- carasoul -->
-  
+
 
 
 <!-- /.container -->

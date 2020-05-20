@@ -19,20 +19,17 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home/book', 'HomeController@index')->name('home');
-Route::get('/api/book', 'BookController@index');
-Route::get('/search' , 'BookController@search');
-
-
-
-Route::resource('/books', 'Book\BookController')->only([
-    'show'
-]);
-
-Route::resource('/comments', 'Book\CommentController')->except([
-    'show'
-]);
-Route::get('/cat/{id}','Book\BookController@getSameCat');
-Route::get('/rate','Book\RateController@store');
-Route::get('/fav','Book\FavoriteController@storeOrUpdate');
-Route::get('/lease','Book\LeaseController@store');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/book/{id}', 'BookController@BooksByCategory')->name('books by category');
+    Route::get('/book', 'BookController@index')->name('search for book');
+    Route::get('/search', 'BookController@search');
+    Route::get('/cat/{id}', 'BookController@getSameCat');
+    Route::resource('/books', 'BookController')->only([
+        'show'
+    ]);
+    Route::resource('/comments', 'CommentController')->except(['show']);
+    Route::get('/rate', 'RateController@store');
+    Route::get('/fav', 'FavoriteController@storeOrUpdate');
+    Route::get('/lease', 'LeaseController@store');
+});

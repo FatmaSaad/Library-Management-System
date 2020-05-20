@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 use DB;
 use Illuminate\Http\Request;
-
-use App\Book;
-use App\Category;
+use Illuminate\Support\Facades\Auth;
+use App\models\Book;
+use App\models\Category;
 
 class BookController extends Controller
 {
+    static protected $index;
+
     /**
      * Display a listing of the resource.
      *
@@ -16,40 +18,21 @@ class BookController extends Controller
      */
     public function index()
     {
-
-        return view ('ajax_search.ajax');
-
-
+        return view ('books.ajax');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
+    {
+        // dd($book);
+        $book = Book::find($id);
+        $relatedBooks=$this->getSameCat($id);
+        $comments=$book->comments;
+        $rate=$book->rates()->where("user_id",Auth::id())->first()->rate;
+        // dd($rate);
+        ($relatedBooks);
+        return view('books.show', array('book' => $book,'relatedBooks'=>$relatedBooks,'comments'=>$comments,"rate"=>$rate));
+    }
+    public function BooksByCategory($id)
     {
 
      $cat = Category::find($id);
@@ -58,49 +41,33 @@ class BookController extends Controller
        ->join('categories','books.category_id','=','categories.id')
        ->where('books.category_id','=',$cat->id)
        ->get();
-        return view('category_pages.category',['categoey_item'=>$cat_book]);
+        return view('Books.category',['categoey_item'=>$cat_book,'category_data'=>\App\models\Category::all()]);
 
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+    public function getSameCat($id)
+    {   self::$index+=4;
+        $categoryid=Book::find($id)->category->id;
+        try {
+            $otherRelatedBooks=Book::where('category_id',$categoryid)->limit(4)->offset(self::$index-4)->get();
+            // self::$index=self::$index+4;
+            if(self::$index==4){
+                 return $otherRelatedBooks;
+            }
+            else{
+                dd(self::$index);
+                // return response()->json(['otherRelatedBooks'=>$otherRelatedBooks,"alaa"=>"alaa"]);
+        }
+        } catch (Throwable $e) {
+            report($e);
+            return false;
+        }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
     public function search(Request $request)
-    {
+    {       
             if($request->ajax())
             {
-
                 $output="";
                 $search_books = DB::table('books')
                 ->where('name','LIKE','%'.$request->search.'%')
@@ -110,9 +77,7 @@ class BookController extends Controller
 
                     foreach($search_books as $itemOfSearch)
                         {
-
                                     $output.='<div class="card-body">'.
-
                                     '<h3 class="card-title">'.$itemOfSearch->name.'</h3>'.
                                     '<h6 class="card-title">'.$itemOfSearch->auther.'</h6>'.
                                     '<p class="card-text">'.$itemOfSearch->description.'</p>'.

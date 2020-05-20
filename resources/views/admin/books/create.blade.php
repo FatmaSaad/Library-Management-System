@@ -1,39 +1,25 @@
-@extends('multiauth::layouts.app')
-@section('title') اضافه
+@extends('admin.layouts.app')
+@section('title') Add
 @endsection
 
 @section('header')
 @endsection
 
-@section('breadcrumb') @php($breadcrumbs=['Books'=>route('books.index'),'books'=>route('books.create')])
+@section('breadcrumb') @php($breadcrumbs=['Books'=>route('admin.books.index'),'books'=>route('admin.books.create')])
 @includeWhen(isset($breadcrumbs),'admin.layouts._breadcrumb', ['breadcrumbs' =>$breadcrumbs ])
 @endsection
 
 @section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-info text-white">Add New Book</div>
 
-
-    <div class="m-content">
-        <div class="row">
-            <div class="col-md-12">
-
-                <!--begin::Portlet-->
-                <div class="m-portlet m-portlet--tab">
-                    <div class="m-portlet__head">
-                        <div class="m-portlet__head-caption">
-                            <div class="m-portlet__head-title">
-                            <span class="m-portlet__head-icon m--hide">
-                                <i class="la la-gear"></i>
-                            </span>
-                                <h3 class="m-portlet__head-text">
-                                    Add
-                                </h3>
-                            </div>
-                        </div>
-                    </div>
-
+                <div class="card-body">
                     <!--begin::Form-->
 
-                    {!! Form::open(['method'=>'post','route'=>'books.store','files'=>'true','class'=>'m-form m-form--fit m-form--label-align-right'])!!}
+                    {!! Form::open(['method'=>'post','route'=>'admin.books.store','files'=>'true','class'=>'m-form m-form--fit m-form--label-align-right'])!!}
                     @include('admin.books._form')
 
                     <div class="m-portlet__foot m-portlet__foot--fit">
@@ -43,12 +29,12 @@
                     </div>
 
                 {!!Form::close()!!}
-                <!--end::Form-->
-                </div>
+                 <!--end::Form-->
             </div>
         </div>
     </div>
+</div>
+</div>
 @endsection
-
 @section('scripts')
 @endsection

@@ -1,34 +1,24 @@
-@extends('multiauth::layouts.app')
-@section('title') اضافه
+@extends('admin.layouts.app')
+@section('title') Add
+@endsection
+
+@section('header')
 @endsection
 
 
+
 @section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-info text-white">Add New ategory</div>
 
-
-<div class="m-content">
-    <div class="row">
-        <div class="col-md-12">
-
-            <!--begin::Portlet-->
-            <div class="m-portlet m-portlet--tab">
-                <div class="m-portlet__head">
-                    <div class="m-portlet__head-caption">
-                        <div class="m-portlet__head-title">
-                            <span class="m-portlet__head-icon m--hide">
-                                <i class="la la-gear"></i>
-                            </span>
-                            <h3 class="m-portlet__head-text">
-                                add
-                            </h3>
-                        </div>
-                    </div>
-                </div>
-
-                <!--begin::Form-->
+                <div class="card-body">
+                    <!--begin::Form-->
 
             {{ Form::open(['method'=>'post',
-            'route'=>'categories.store',
+            'route'=>'admin.categories.store',
             'files'=>'true',
             'class'=>'m-form m-form--fit m-form--label-align-right'])}}
                   @include('admin.categories._form')
@@ -40,11 +30,12 @@
                 </div>
                 {{ Form::close() }}
                 <!--end::Form-->
+
             </div>
         </div>
     </div>
 </div>
+</div>
 @endsection
-
 @section('scripts')
 @endsection

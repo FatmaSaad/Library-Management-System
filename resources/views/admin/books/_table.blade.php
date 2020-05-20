@@ -26,15 +26,19 @@
             <td>{!! $book->quantity!!}</td>
             <td>{!! $book->auther!!}</td>
 
-            <td><a href="{!!route('books.edit',$book->id)!!}" class="btn btn-primary"> <i class="fas fa-pen"></i>
-                Edit</a>
-                <form method="POST" action="{!!route('books.destroy',$book->id)!!}">
-                    @csrf() @method('delete')
-                    <button type="submit" class="btn btn-danger">
-                        <i class="fas fa-trash"></i>
-                        Delete
-                    </button>
-                </form>
+            <td>
+                <div class="row">
+
+                    <a href="{!!route('admin.books.edit',$book->id)!!}" class="btn btn-primary"> <i class="fas fa-pen"></i>
+                    Edit</a>
+                    <form method="POST" action="{!!route('admin.books.destroy',$book->id)!!}">
+                        @csrf() @method('delete')
+                        <button type="submit" class="btn btn-danger">
+                            <i class="fas fa-trash"></i>
+                            Delete
+                        </button>
+                    </form>
+                </div>
             </td>
 
         </tr>

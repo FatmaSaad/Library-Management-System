@@ -1,6 +1,6 @@
 <div class="m-portlet__body">
 
-    @inject('book','\App\Book')
+    @inject('book','\App\models\Book')
     <div class="form-group m-form__group">
         <label> name </label>
 
@@ -13,7 +13,7 @@
 
     <div class="form-group m-form__group">
         <label>category</label>
-        {!! Form::select('category_id',\App\Category::pluck('name','id'),null,['class'=>'form-control m-input select2'])!!}
+        {!! Form::select('category_id',\App\models\Category::pluck('name','id'),null,['class'=>'form-control m-input select2'])!!}
     </div>
 
     <div class="form-group m-form__group">
