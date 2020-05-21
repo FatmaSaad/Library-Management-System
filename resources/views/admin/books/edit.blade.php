@@ -6,7 +6,7 @@
 @endsection
 
 @section('breadcrumb')
-    @php($breadcrumbs=['Books'=>route('home'),'Edit'=>route('books.edit',$book->id)])
+    @php($breadcrumbs=['Books'=>route('home'),'Edit'=>route('admin.books.edit',$book->id)])
     @includeWhen(isset($breadcrumbs),'admin.layouts._breadcrumb',
 ['breadcrumbs' =>$breadcrumbs ])
 @endsection
@@ -34,7 +34,7 @@
 
                     <!--begin::Form-->
 
-                    {!! Form::model($book,['method'=>'put','route'=>['books.update',$book->id],'files'=>'true','class'=>'m-form m-form--fit m-form--label-align-right'])!!}
+                    {!! Form::model($book,['method'=>'put','route'=>['admin.books.update',$book->id],'files'=>'true','class'=>'m-form m-form--fit m-form--label-align-right'])!!}
                     @include('admin.books._form')
 
                     <div class="m-portlet__foot m-portlet__foot--fit">

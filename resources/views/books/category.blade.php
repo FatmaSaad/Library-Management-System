@@ -54,7 +54,8 @@
                 @foreach($categoey_item as $item)
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="card h-100">
-                        <a href="#"><img class="card-img-top" src={{$item->image}} alt=""></a>
+                            <a><img src="{!! asset($item->image )!!}" width="250" height="150"></a>
+
                         <div class="card-body">
                             <h4 class="card-title">
                             <a href="#">{{$item->name}}</a>

@@ -45,8 +45,16 @@ class BookController extends Controller
      */
     public function store(BookRequest $request)
     {
-        $requests=$request->except('date');
+    // {dd($request);
+        $requests=$request->except('date','image');
         $requests['date']=Carbon::parse($request->date);
+
+        $file = $request->file('image');
+        $destination_path = 'images/';
+        $profileImage = date("Ymd").".".$file->getClientOriginalName();
+        $file->move($destination_path, $profileImage);
+        $requests['image'] = $destination_path . $profileImage;
+
         // dd($requests);
         $Book = Book::create($requests);
         // toast('done', 'success', 'top-right');
@@ -88,8 +96,13 @@ class BookController extends Controller
      */
     public function update(BookRequest $request, $id)
     {
-        $requests=$request->except('date');
+        $requests=$request->except('date','image');
         $requests['date']=Carbon::parse($request->date);
+        $file = $request->file('image');
+        $destination_path = 'images/';
+        $profileImage = date("Ymd").".".$file->getClientOriginalName();
+        $file->move($destination_path, $profileImage);
+        $requests['image'] = $destination_path . $profileImage;
         $Book = Book::findOrFail($id)->fill($requests);
         $Book->save();
         return redirect()->route('admin.books.index');

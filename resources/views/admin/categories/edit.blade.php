@@ -1,4 +1,4 @@
-@extends('multiauth::layouts.app')
+@extends('admin.layouts.app')
 @section('title') Edit  {!!$category->name!!}
 @endsection
 
@@ -6,7 +6,7 @@
 @endsection
 
 @section('breadcrumb')
-@php($breadcrumbs=['edit category'=>route('home'),'Edit'=>route('categories.edit',$category->id)])
+@php($breadcrumbs=['edit category'=>route('home'),'Edit'=>route('admin.categories.edit',$category->id)])
     @includeWhen(isset($breadcrumbs),'admin.layouts._breadcrumb',
 ['breadcrumbs' =>$breadcrumbs ])
 @endsection
@@ -35,7 +35,7 @@
 
                 <!--begin::Form-->
 
-                {!! Form::model($category,['method'=>'put','route'=>['categories.update',$category->id],'files'=>'true','class'=>'m-form m-form--fit m-form--label-align-right'])!!}
+                {!! Form::model($category,['method'=>'put','route'=>['admin.categories.update',$category->id],'files'=>'true','class'=>'m-form m-form--fit m-form--label-align-right'])!!}
     @include('admin.categories._form')
 
                 <div class="m-portlet__foot m-portlet__foot--fit">

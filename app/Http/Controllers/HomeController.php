@@ -31,6 +31,8 @@ class HomeController extends Controller
         $bookFavourite = DB::table('books')
         ->join('favorites','books.id','=','favorites.book_id')
         ->paginate(2);
-         return view('home', ['book' => $bookDataWithRate , 'bookFav'=>$bookFavourite , 'category_data'=>Category::all()]);
+        $images= Book::pluck('image')->toArray();
+
+         return view('home', ['book' => $bookDataWithRate , 'bookFav'=>$bookFavourite , 'category_data'=>Category::all(),'images'=>$images]);
     }
 }
