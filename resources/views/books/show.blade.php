@@ -13,7 +13,8 @@
   <div class="row">
 
     <div class="col-md-4">
-      <img class="img-fluid" src="http://placehold.it/750x500" alt="">
+      <img class="img-fluid" src="{!! asset($book->image )!!}"  alt="">
+
     </div>
 
     <div class="col-md-4">
@@ -136,7 +137,8 @@
           <div class="col-md-3 col-sm-6 mb-4 p-2">
             <a href="#">
               <div class="card">
-                <img class="card-img-top" src="http://placehold.it/500x300" alt="">
+                <img class="img-fluid" src="{!! asset($book->image )!!}"  alt="">
+
                 <div class="card-body">
                   <h4 class="card-title">{{$book->title}}</h4>
                   <p class="card-text">{{$book->description}}</p>
