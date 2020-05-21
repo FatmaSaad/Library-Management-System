@@ -24,14 +24,26 @@ class BookController extends Controller
     public function show($id)
     {
         // dd($book);
-        $book = Book::find($id);
-        $relatedBooks=$this->getSameCat($id);
-        $comments=$book->comments;
-        $rate=$book->rates()->where("user_id",Auth::id())->first()->rate;
-        // dd($rate);
-        ($relatedBooks);
-        return view('books.show', array('book' => $book,'relatedBooks'=>$relatedBooks,'comments'=>$comments,"rate"=>$rate));
+        try {
+            $book = Book::find($id);
+            if($book){
+                $relatedBooks=$this->getSameCat($id);
+                $comments=$book->comments;
+                $averageRate=optional($book->rates())->avg('rate');
+                $rate=optional($book->rates()->where("user_id",Auth::id())->first())->rate;
+                return view('books.show', array('book' => $book,'relatedBooks'=>$relatedBooks,'comments'=>$comments,"rate"=>$rate, "averageRate" =>$averageRate));
+            }
+            else{
+                return abort(404);
+            }    
+            }
+        catch (Throwable $e) {
+                report($e);
+                return false;
+        }
+
     }
+
     public function BooksByCategory($id)
     {
 
@@ -47,7 +59,11 @@ class BookController extends Controller
 
     public function getSameCat($id)
     {   self::$index+=4;
-        $categoryid=Book::find($id)->category->id;
+        if(Book::find($id)){
+            $categoryid=Book::find($id)->category->id;
+        }else{
+            $categoryid=false;
+        }
         try {
             $otherRelatedBooks=Book::where('category_id',$categoryid)->limit(4)->offset(self::$index-4)->get();
             // self::$index=self::$index+4;

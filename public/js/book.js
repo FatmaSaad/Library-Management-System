@@ -29,7 +29,7 @@ function updateRate(rate) {
     });
 }
 
-let love = document.querySelector("#love");
+$("#love");
 function updateFavorite() {
     $.ajax({
         type: "GEt",
@@ -40,10 +40,8 @@ function updateFavorite() {
         success: function(response) {
             console.log(response);
             if (response.like == "yes") {
-                console.log(love);
-                love.style.color = "red";
+                $("#love").css({ color: "#f00" });
             } else {
-                console.log(love.className);
                 love.style.color = "gray";
             }
         },
@@ -127,12 +125,13 @@ document.addEventListener("DOMContentLoaded", function() {
             },
             success: function(response) {
                 $("#addComment").val("");
-                newcomment = `<div class="media mb-4">
-                          <div class="media-body">
-                            <h5 class="mt-0">${response.name}</h5>
-                            ${comment}
-                          </div>
-                        </div>`;
+                newcomment = `<div class="card">
+                    <div class="card-header">
+                    <h5 class="mt-0">${response.name} </h5>
+                    </div>
+                    <div class="card-body">${comment}</div>
+                </div>
+                </br>`;
                 $("#comments").append(newcomment);
 
                 console.log(response.name);

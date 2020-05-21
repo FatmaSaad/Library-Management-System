@@ -13,12 +13,20 @@
   <div class="row">
 
     <div class="col-md-4">
+    @if($book->image)
       <img class="img-fluid" src="{!! asset($book->image )!!}"  alt="">
-
+    
+    @else
+      <img class="img-fluid" src="http://via.placeholder.com/400x400"  alt="">
+    @endif
     </div>
-
+    <!-- lease input-->
     <div class="col-md-4">
-
+    <div class="flex-container">
+      @for($i=0;$i<$averageRate;$i++ )
+          <h4 style="color:#f8ce0b; display:inline">&#9733;</h4>
+      @endfor
+    </div>   
       <h4>{{$book->description}}</h4>
       <h3 class="my-3">Book Details</h3>
       <ul>
@@ -66,7 +74,13 @@
                 </div>
 
     <div class="col-md-4">
-      <h1 id="love" style="color:gray;" onclick="updateFavorite()" class="btn">&#x2764;</h1>
+        <div class="card ">
+            <p class="card-header">Favorite</p>
+              <div >
+                <h4 id="love" style="color:gray ;width:20px" onclick="updateFavorite()" class="btn">&#x2764;</h4>
+              </div>
+        </div>
+</br>
         <!-- Rate Widget -->
         <div class="card ">
           <h5 class="card-header">Rate</h5>
@@ -137,8 +151,12 @@
           <div class="col-md-3 col-sm-6 mb-4 p-2">
             <a href="#">
               <div class="card">
+              @if($book->image)
                 <img class="img-fluid" src="{!! asset($book->image )!!}"  alt="">
-
+              
+              @else
+              <img class="img-fluid" src="http://via.placeholder.com/400x400"  alt="">
+              @endif
                 <div class="card-body">
                   <h4 class="card-title">{{$book->title}}</h4>
                   <p class="card-text">{{$book->description}}</p>
